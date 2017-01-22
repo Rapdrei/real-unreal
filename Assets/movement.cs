@@ -13,7 +13,6 @@ public class movement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         audio = GetComponent<AudioSource>();
-
     }
 	
 	// Update is called once per frame
@@ -21,8 +20,10 @@ public class movement : MonoBehaviour {
  
          float idx = (Input.GetAxis("Horizontal")) ;
         float idy = (Input.GetAxis("Vertical"));
-        transform.Translate(idx * Time.deltaTime*speed, 0f, speed*idy * Time.deltaTime,Space.Self); 
-          
+        Transform t = GetComponent<Transform>();
+        transform.Translate(idx * speed *Time.deltaTime,0, idy* speed * Time.deltaTime, Space.Self); 
+        transform.Translate(new Vector3 ( 0, -t.forward.y * (idy) * Time.deltaTime * speed, 0),Space.World);
+        //Debug.Log(t.forward.x + "  "+ t.forward.y + "   " + t.forward.z);
         dx += Abs(idx)*speed;
         dy += Abs(idy) * speed;
 
